@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>绘制图片与序列帧（小哥哥走路/面向过程）</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<canvas id="canvas"></canvas><br>
+<button id="btn_left">向左</button>
+<button id="btn_right">向右</button>
+<button id="btn_top">向外</button>
+<button id="btn_bottom">向内</button>
+<script type="text/javascript">
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.border = '1px solid #000';
+        /*创建图形对象*/
+        var img = new Image();
+        img.src = 'imgs/gameImgs/DMMban.png';
+        var ctx = canvas.getContext("2d");
+        /*设置方向索引*/
+        var dirIndex = 0;
+        var frame = 0;
+        img.onload = function(){
+            setInterval(function(){
+                /*清除之前的图片*/
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.drawImage(img, frame * 40, dirIndex * 65, 40, 65, 200, 200, 80, 130);
+                frame++;
+                frame %= 4;
+            },100);
+        }
+
+        var btnLeft = document.getElementById('btn_left');
+        /*console.log(btnLeft);*/
+        btnLeft.onclick = function(){
+            dirIndex = 1;
+        };
+        var btnRight = document.getElementById('btn_right');
+        btnRight.onclick = function(){
+            dirIndex = 2;
+        };
+        var btnTop = document.getElementById('btn_top');
+        btnTop.onclick = function(){
+            dirIndex = 0;
+        };
+        var btnBottom = document.getElementById('btn_bottom');
+        btnBottom.onclick = function(){
+            dirIndex = 3;
+        };
+    }
+</script>
+</body>
+</html>

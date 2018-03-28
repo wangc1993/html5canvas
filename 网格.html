@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>折线图</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext("2d");
+        canvas.width = 900;
+        canvas.height = 800;
+        canvas.style.border = '1px solid #000';
+
+        var height = 600;
+        var width = 600;
+        ctx.lineWidth = .5;
+        for(var i=0; i<=60; i++){
+            ctx.beginPath();
+            ctx.moveTo(100,100 + 10 * i);
+            ctx.lineTo(100 + width,100 + 10 * i);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(100 + 10 * i,100);
+            ctx.lineTo(100 + 10 * i,100+ height);
+            ctx.stroke();
+        }
+    }
+</script>
+</body>
+</html>

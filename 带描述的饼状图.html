@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>带描述的饼状图</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<canvas id="cas"></canvas>
+<script type="text/javascript">
+    window.onload = function(){
+        var cas = document.getElementById('cas');
+        var ctx = cas.getContext("2d");
+        /*设置canvas的宽、高、边框*/
+        cas.width = 600;
+        cas.height =600;
+        cas.style.border = '1px solid #000';
+        /*数据*/
+        var data = [{
+                "value": .2,
+                "color": "red",
+                "title": "应届生"
+            },{
+                "value": .3,
+                "color": "blue",
+                "title": "社会招生"
+            },{
+                "value": .4,
+                "color": "green",
+                "title": "老学员推荐"
+            },{
+                "value": .1,
+                "color": "#ccc",
+                "title": "公开课"
+            },];
+        /*圆心位置*/
+        var x0 = 200, y0 = 200;
+        /*圆的半径*/
+        var radius = 100;
+        /*文本的半径*/
+        var textRadius = 120;
+        /*起始角度（基角）*/
+        var tmp = -90;
+        /*遍历数据，并画出对应的扇形*/
+        for(var i=0; i<data.length; i++){
+            ctx.beginPath();
+            /*定位到圆心*/
+            ctx.moveTo(200,200);
+            /*计算所占度数*/
+            var angle = data[i].value * 360;
+            /*开始角度（单位弧度）*/
+            var startAngle = tmp * Math.PI /180;
+            /*结束角度（单位弧度）*/
+            var endAngle = (tmp + angle) * Math.PI /180;
+            /*绘制扇形*/
+            ctx.arc(x0, y0, radius, startAngle, endAngle);
+            ctx.fillStyle = data[i].color;
+            ctx.fill();
+            /*设置文本的颜色*/
+            ctx.font = '12px sans-serif';
+            /*计算文本开始的角度（弧度）*/
+            var middleAngle = (startAngle + endAngle) /2;
+            /*计算文本的基点（直接套公式）*/
+            var x1 = x0 + Math.cos(middleAngle) * textRadius;
+            var y1 = y0 + Math.sin(middleAngle) * textRadius;
+            /*判断对齐*/
+            if(middleAngle > (Math.PI/2) && middleAngle < (Math.PI*3/2)){
+                ctx.textAlign = 'end';
+            }
+            ctx.fillText(data[i].title, x1, y1);
+            /*改变基角*/
+            tmp += angle;
+        }
+    }
+</script>
+</body>
+</html>

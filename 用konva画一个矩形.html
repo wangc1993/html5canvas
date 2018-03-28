@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>konva矩形</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+    </style>
+    <!-- 导入konva的库 -->
+    <script type="text/javascript" src="bower_components/konva/konva.js"></script>
+</head>
+<body>
+<!-- 放画布的容器 -->
+<div id="container"></div>
+<script type="text/javascript">
+    window.onload = function(){
+        /*实例一个舞台*/
+        var stage = new Konva.Stage({
+            container: 'container',/*设置当前舞台的容器*/
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+        /*实例一个层（创建层）*/
+        var layer = new Konva.Layer();
+        stage.add(layer);
+        /*实例化一个矩形*/
+        var rect = new Konva.Rect({
+            x: 100,
+            y: 100,
+            width: 100,
+            height: 100,
+            fill: 'red',/*只要设置了fill属性，konva就会填充矩形*/
+            draggable: true/*可拖动*/
+        });
+
+        /*把矩形加到层里面*/
+        layer.add(rect);
+        /*将层画出来*/
+        layer.draw();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>调用封装好的圆</title>
+    <script type="text/javascript" src="js/圆（封装）.js"></script>
+</head>
+<body>
+    <canvas id="canvas">
+    <script type="text/javascript">
+        window.onload = function(){
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext("2d");
+            canvas.width = 600;
+            canvas.height = 600;
+            canvas.style.border = '1px solid #000';
+
+            var circle = new Circle({
+                X: 100,
+                Y: 100,
+                rad: 100,
+                startAngle: -90,
+                endAngle: 90,
+                scaleX: 1.5,
+                scaleY: 1,
+                opacity: 1,
+                rotation: 10,
+                fillStyle: 'black',
+                direction: false
+            });
+            circle.render(ctx);
+            setInterval(function(){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                circle.X += 1;
+                circle.render(ctx);
+            },100);
+        }
+    </script>
+</canvas>
+</body>
+</html>

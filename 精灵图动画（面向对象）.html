@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>精灵图动画（面向对象）</title>
+    <script type="text/javascript" src="js/精灵图（序列帧）.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas><br>
+<button id="btn_left">向左</button>
+<button id="btn_right">向右</button>
+<button id="btn_top">向外</button>
+<button id="btn_bottom">向内</button>
+<script type="text/javascript">
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext("2d");
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.border = '1px solid #000';
+
+        var drawPic = new DrawImg({
+            imgSrc: 'imgs/gameImgs/DMMban.png',
+            originalX: 0,
+            originalY: 0,
+            imgWidth: 40,
+            imgHeight: 65,
+            X: 100,
+            Y: 100,
+            w: 80,
+            h: 130,
+            fps: 5,
+        });
+        drawPic.draw(ctx);
+        /*方向点击事件*/
+        var btnLeft = document.getElementById('btn_left');
+        btnLeft.onclick = function(){
+            drawPic.changeDir('left');
+        };
+        var btnRight = document.getElementById('btn_right');
+        btnRight.onclick = function(){
+            drawPic.changeDir('right');
+        };
+        var btnTop = document.getElementById('btn_top');
+        btnTop.onclick = function(){
+            drawPic.changeDir('top');
+        };
+        var btnBottom = document.getElementById('btn_bottom');
+        btnBottom.onclick = function(){
+            drawPic.changeDir('bottom');
+        };
+    }
+</script>
+</body>
+</html>
